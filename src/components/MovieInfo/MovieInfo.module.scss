@@ -1,0 +1,111 @@
+.MovieInfo {
+    background-color: #ccc;
+    // margin: 0 auto;
+    &__img {
+     padding: 5px 8px;   
+    }
+    &__container {
+        height: 435px;
+    }
+    &__well {
+        min-height: 20px;
+        padding: 19px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    }
+    &__plot {
+        margin: 0 10px; 
+    }
+    &__button {
+        margin: 10px; 
+    }
+}   
+
+.LeftSide {
+    margin: 10px;
+    position: relative;
+    display: inline-block;
+    // bottom: 90px;
+}
+.RightSide {
+    max-width: 550px;
+    font-size: .9rem;
+    margin: 10px;
+    position: relative;
+    display: inline-block;
+    bottom: 90px;
+}
+
+li {
+    margin-bottom: 15px;
+    list-style: none;
+}
+
+@media (max-width: 600px) {
+    .MovieInfo {
+        text-align: center;
+        font-size: .7rem;
+        &__container {
+            height: 285px;
+        }
+        &__plot {
+            position: relative;
+            // bottom: 290px;
+        }
+        &__button {
+            position: relative;
+            // bottom: 290px;
+        }
+        &__well {
+            min-height: 20px;
+            padding: 8px;
+            background-color: #f5f5f5;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        }
+    }
+    .LeftSide {
+        position: relative;
+        display: block;
+        bottom: 135px;
+    }
+    .RightSide {
+        margin: 10px;
+        position: relative;
+        display: inline-block;
+        top: 0px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1818px){
+    .MovieInfo {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-size: .7rem;
+        &__container {
+            width: 160px;
+        }
+    }
+    .RightSide {
+        margin: 10px;
+        position: relative;
+        display: inline-block;
+        bottom: 429px;
+        left: 174px;
+        width: 280px;
+        font-size: .8rem;
+        }
+        .LeftSide {
+            display: inline-block;
+            position: relative;
+            display: block;
+            bottom: 95px;
+            right: 74px;
+        }
+    }

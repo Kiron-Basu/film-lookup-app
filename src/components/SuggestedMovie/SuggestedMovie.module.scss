@@ -1,0 +1,14 @@
+.SuggestedMovie {
+    height: 60px;
+    width: 70px;
+    background-color: orange;
+    margin: 0 auto;
+    // margin-top: .5rem;
+    // margin-bottom: .5rem;
+
+    @media screen and (min-width: 750px){ 
+        height: 100%;
+        width: 100%;
+        background-color: pink;
+        }
+}
