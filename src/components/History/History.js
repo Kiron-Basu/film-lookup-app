@@ -13,7 +13,6 @@ class History extends Component {
       }
    
     render() {
-    console.log(history);
       history.push(this.props.history) 
     return (
         <>

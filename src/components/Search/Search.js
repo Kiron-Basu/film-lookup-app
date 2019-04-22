@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Search.module.scss';
 
 const Search = (props) => {
-    console.log('searchInput from SEARCH=== ', props.searchInput)
     return (
         <div className={classes.Search}>
                 <input onChange={props.inputChangeHandler} className={classes.Search__bar} onKeyPress={props.enterVerify} type='text' value={props.searchInput}></input> 

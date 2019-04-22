@@ -10,8 +10,11 @@ class MainPanel extends Component {
     constructor(){
         super()
         this.state = {
-              searchInput: '',
-              currentSearch: {},
+              searchInput: 'home alone',
+              currentSearch: {Search:[{Title: "Home Alone", Year: "1990", imdbID: "tt0099785", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BMzFkM2YwOTQtYzk2Mi00N2VlLWE3NTItN2YwNDg1YmY0ZDNmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"},
+              {Title: "Home Alone 2: Lost in New York", Year: "1992", imdbID: "tt0104431", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BNDI1MzM0Y2YtYmIyMS00ODE3LTlhZjEtZTUyNmEzMTNhZWU5XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"},
+              {Title: "Home Alone 3", Year: "1997", imdbID: "tt0119303", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BZTJhYjVhOWMtYTUyOS00NWM0LThjNzYtZWYxOTkwN2FhODg2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"}
+            ]},
               relatedMovies: {},
               history: [],
               modal: false,
@@ -20,11 +23,11 @@ class MainPanel extends Component {
               loading: true,
               errorMessage: null 
         }
+        this.submitEventHandler()
         this.showMore = this.showMore.bind(this); //why needed?
     }
 
     enterVerify = (event) => {
-      console.log('enterVerify called with this ebent --> ', event);
       if(event.charCode ==13) {
         this.submitEventHandler()
       }
@@ -54,7 +57,6 @@ class MainPanel extends Component {
               this.setState({errorMessage: null});
               return response.text();
           }).then(text => {
-              console.log("text= ", JSON.parse(text).Response);
               if (JSON.parse(text).Response === "True") {
               let json = JSON.parse(text);
               this.setState({currentSearch: json});
@@ -95,7 +97,6 @@ class MainPanel extends Component {
       }
       
       relatedMoviesHandler = (title) => {
-        console.log('title passed in from poster= ', title)
         fetch('http://www.omdbapi.com/?t=' + title + '&apikey=4f4ff1ce', {
             method: "get"
         }).then(response => {
@@ -110,7 +111,7 @@ class MainPanel extends Component {
     }
 
     render() {
-      console.log(this.state.errorMessage);
+      console.log(this.state.currentSearch);
     return (
         <>
         <div className={classes.MainPanel}>
