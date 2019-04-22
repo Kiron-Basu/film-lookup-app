@@ -39,7 +39,8 @@
 }
 
 .MainPanel >*{
-    background: rgb(85, 85, 85);
+    background: rgb(143, 143, 143);
+    box-shadow: 0 1.5rem 3rem rgba(black, 0.5);
 }
 
 .MainPanel {
@@ -74,5 +75,15 @@
         border: none;
         outline: none;
     }
+    &__err {
+        position: relative;
+        height: 200px;
+        font-size: 2rem;
+        background-color: #bba17f;
+        color: black;
+        border: 1px black solid;
+        text-align: center;
+        padding: 50px 100px;
+        margin: 0 auto;
+    }
 }
-

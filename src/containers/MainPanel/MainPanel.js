@@ -10,16 +10,30 @@ class MainPanel extends Component {
     constructor(){
         super()
         this.state = {
-            searchInput: '',
-            currentSearch: {},
+              searchInput: '',
+              currentSearch: {},
               relatedMovies: {},
               history: [],
               modal: false,
               itemsToShow: 6,
-              expanded: false  
+              expanded: false,
+              loading: true,
+              errorMessage: null 
         }
         this.showMore = this.showMore.bind(this); //why needed?
     }
+
+    enterVerify = (event) => {
+      console.log('enterVerify called with this ebent --> ', event);
+      if(event.charCode ==13) {
+        this.submitEventHandler()
+      }
+    }
+
+    purchaseHandler = (title) => {
+      window.open("https://www.amazon.co.uk/s?k=" + title)
+      }
+
     showMore() {
       this.state.itemsToShow === 6 ? (
         this.setState({ itemsToShow: this.state.currentSearch.Search.length, expanded: true })
@@ -37,10 +51,17 @@ class MainPanel extends Component {
           fetch('http://www.omdbapi.com/?s=' + this.state.searchInput + '&apikey=4f4ff1ce', {
               method: "get"
           }).then(response => {
+              this.setState({errorMessage: null});
               return response.text();
           }).then(text => {
+              console.log("text= ", JSON.parse(text).Response);
+              if (JSON.parse(text).Response === "True") {
               let json = JSON.parse(text);
               this.setState({currentSearch: json});
+              this.setState({loading: false})} else {
+              this.setState({errorMessage: JSON.parse(text).Error});
+              this.setState({loading: false});
+              }
             }).then(() => { //arrow function fixed this error
              this.setState({history: this.state.searchInput});
           }).then(() => { //alt for too many searches
@@ -52,10 +73,16 @@ class MainPanel extends Component {
         fetch('http://www.omdbapi.com/?s=' + query.search + '&apikey=4f4ff1ce', {
               method: "get"
           }).then(response => {
+              this.setState({errorMessage: null});
               return response.text();
           }).then(text => {
+            if (JSON.parse(text).Response === "True") {
               let json = JSON.parse(text);
               this.setState({currentSearch: json});
+              this.setState({loading: false})} else {
+              this.setState({errorMessage: JSON.parse(text).Error});
+              this.setState({loading: false});
+              }
             }).then(() => {
                 this.setState({searchInput: query.search});
               }).then(() => {
@@ -78,27 +105,27 @@ class MainPanel extends Component {
             this.setState({relatedMovies: json});
         }).then(() => {
             console.log(this.state.relatedMovies)
-            // this.openModal(title);
             this.setState({modal: true})
   })
     }
 
     render() {
+      console.log(this.state.errorMessage);
     return (
         <>
         <div className={classes.MainPanel}>
             <div className={classes.MainPanel__searchBar}>
-                <SearchBar inputChangeHandler={this.inputChangeHandler} submitEvent={this.submitEventHandler} searchInput={this.state.searchInput}/>
+                <SearchBar 
+                inputChangeHandler={this.inputChangeHandler} 
+                submitEvent={this.submitEventHandler} 
+                searchInput={this.state.searchInput}
+                enterVerify={this.enterVerify}
+                />
             </div>
             {this.state.currentSearch.Search === undefined ? null : 
-            <div className={classes.MainPanel__mainMovie}>
-                {/* <MainMovie mainMovie={this.props.mainMovie}/> */}
-                {/* {loading && !errorMessage ? (
-         <span>loading...</span>
-         ) : errorMessage ? (
-          <div className="errorMessage">{errorMessage}</div>
-        ) : ( */}
-          {this.state.currentSearch.Search.slice(0,this.state.itemsToShow).map((movie, index) => (
+            this.state.errorMessage ? <div className={classes.MainPanel__err}>{this.state.errorMessage}</div> :
+            <div className={classes.MainPanel__mainMovie}>   
+            {this.state.currentSearch.Search.slice(0,this.state.itemsToShow).map((movie, index) => (
             <MoviePoster key={`${index}-${movie.Title}`} movie={movie} relatedMovies={this.relatedMoviesHandler}/>
           )) 
           }
@@ -119,7 +146,7 @@ class MainPanel extends Component {
             </div>
         </div>
         <Modal show={this.state.modal} modalClosed={this.modalClosed}>
-            <MovieInfo movie={this.state.currentSearch} movieExt={this.state.relatedMovies}/>
+            <MovieInfo movie={this.state.currentSearch} movieExt={this.state.relatedMovies} purchaseHandler={this.purchaseHandler}/>
         </Modal>
         </>
         )
@@ -127,4 +154,3 @@ class MainPanel extends Component {
 }   
 
 export default MainPanel;
-// slice(0, 5).map

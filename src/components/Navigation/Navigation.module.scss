@@ -1,5 +1,4 @@
 nav {
-    color: white;
     display: flex;
     flex-direction: row;
     margin-top: 0rem;
@@ -12,7 +11,14 @@ nav {
     text-align: center;
     &__title {
         @extend .Nav;
+        color: #111; 
+        font-size: 2rem; 
+        font-weight: bold; 
+        letter-spacing: -1px; 
+        line-height: 1; 
+        text-align: center; 
         flex: 2 1 auto;
+        text-shadow: rgb(107, 106, 100) .2px 2px 5px;
     }
     &__info {
         @extend .Nav;

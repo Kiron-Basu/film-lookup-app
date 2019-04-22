@@ -24,11 +24,11 @@ const MovieInfo = (props) => {
                 </div>
             </div>
             
-            <div div className={[classes.MovieInfo__plot, classes.MovieInfo__well].join(' ')}>
+            <div className={[classes.MovieInfo__plot, classes.MovieInfo__well].join(' ')}>
                 <h3>Plot</h3>
                 <p>{props.movieExt.Plot}</p>
             </div>
-            <button className={classes.MovieInfo__button}>Buy on Amazon</button>
+            <button className={classes.MovieInfo__button} onClick={() => props.purchaseHandler(props.movieExt.Title)}>Buy on Amazon</button>
         <div>
         
             </div>
@@ -40,4 +40,3 @@ const MovieInfo = (props) => {
 export default MovieInfo;
 
 
-// https://www.amazon.co.uk/s?k=pip+the+movie&ref=nb_sb_noss_2
