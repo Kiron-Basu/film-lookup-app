@@ -11,10 +11,7 @@ class MainPanel extends Component {
         super()
         this.state = {
               searchInput: 'home alone',
-              currentSearch: {Search:[{Title: "Home Alone", Year: "1990", imdbID: "tt0099785", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BMzFkM2YwOTQtYzk2Mi00N2VlLWE3NTItN2YwNDg1YmY0ZDNmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"},
-              {Title: "Home Alone 2: Lost in New York", Year: "1992", imdbID: "tt0104431", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BNDI1MzM0Y2YtYmIyMS00ODE3LTlhZjEtZTUyNmEzMTNhZWU5XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"},
-              {Title: "Home Alone 3", Year: "1997", imdbID: "tt0119303", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BZTJhYjVhOWMtYTUyOS00NWM0LThjNzYtZWYxOTkwN2FhODg2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"}
-            ]},
+              currentSearch: {},
               relatedMovies: {},
               history: [],
               modal: false,
@@ -28,7 +25,7 @@ class MainPanel extends Component {
     }
 
     enterVerify = (event) => {
-      if(event.charCode ==13) {
+      if(event.charCode ===13) {
         this.submitEventHandler()
       }
     }
@@ -66,8 +63,6 @@ class MainPanel extends Component {
               }
             }).then(() => { //arrow function fixed this error
              this.setState({history: this.state.searchInput});
-          }).then(() => { //alt for too many searches
-            //   this.relatedMoviesHandler(this.state.searchInput)
           })
       }
      
@@ -87,8 +82,6 @@ class MainPanel extends Component {
               }
             }).then(() => {
                 this.setState({searchInput: query.search});
-              }).then(() => {
-               console.log('searchInput === ', this.state.searchInput)
               })
         }
       
@@ -111,7 +104,6 @@ class MainPanel extends Component {
     }
 
     render() {
-      console.log(this.state.currentSearch);
     return (
         <>
         <div className={classes.MainPanel}>
@@ -124,6 +116,9 @@ class MainPanel extends Component {
                 />
             </div>
             {this.state.currentSearch.Search === undefined ? null : 
+            this.state.loading && !this.state.errorMessage ? <span className={classes.MainPanel__err} style={{height:"100%"}}>Loading...</span> :
+
+
             this.state.errorMessage ? <div className={classes.MainPanel__err}>{this.state.errorMessage}</div> :
             <div className={classes.MainPanel__mainMovie}>   
             {this.state.currentSearch.Search.slice(0,this.state.itemsToShow).map((movie, index) => (

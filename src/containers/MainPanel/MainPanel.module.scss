@@ -30,7 +30,7 @@
    @media screen and (min-width:1200px){ 
     .MainPanel {
     @include grid-large();
-    height: 800px;
+    height: 850px;
     &__btnLess {
         margin-top: 350px;
         margin-left: 15%;
