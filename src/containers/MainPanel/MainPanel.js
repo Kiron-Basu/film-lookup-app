@@ -51,7 +51,7 @@ class MainPanel extends Component {
     // returns search from main search bar
     // var _this = this; --->could have been an alt to arrow func fix
     fetch(
-      `http://www.omdbapi.com/?s=${this.state.searchInput}&apikey=4f4ff1ce`,
+      `https://www.omdbapi.com/?s=${this.state.searchInput}&apikey=4f4ff1ce`,
       {
         method: 'get',
       }
@@ -77,7 +77,7 @@ class MainPanel extends Component {
 
   inputHistory = query => {
     // returns search from when history items are clicked
-    fetch(`http://www.omdbapi.com/?s=${query.search}&apikey=4f4ff1ce`, {
+    fetch(`https://www.omdbapi.com/?s=${query.search}&apikey=4f4ff1ce`, {
       method: 'get',
     })
       .then(response => {
@@ -104,7 +104,7 @@ class MainPanel extends Component {
   };
 
   relatedMoviesHandler = title => {
-    fetch(`http://www.omdbapi.com/?t=${title}&apikey=4f4ff1ce`, {
+    fetch(`https://www.omdbapi.com/?t=${title}&apikey=4f4ff1ce`, {
       method: 'get',
     })
       .then(response => response.text())
